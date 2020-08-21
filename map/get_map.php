@@ -1,14 +1,19 @@
 <?php
 if (isset($_POST['user'])) {
+	// if (true) {
 	require_once($_SERVER['DOCUMENT_ROOT'] . '/init.php');
 
 	$user = htmlspecialchars($_POST['user']);
+	// $user = "6wllEXObPTlGv8lSjXMH";
 	$user = new Dnew\User($user);
 	$map = new Dnew\Map($user->getMap());
 
+	//Update last_seen
+	$user->updateLastSeen();
 
 	// Si l'user se connecte depuis longtemps
 	if (isset($_POST['get_map'])) {
+		// if (true) {
 		//On envoie la map entière
 		echo "SET_MAP;" . str_replace(",", " ", $map->getMapModif()) . ";";
 
@@ -16,7 +21,7 @@ if (isset($_POST['user'])) {
 		$req = $map->getConnectedUsers();
 
 		for ($i = 0; $i < count($req); $i++) {
-			$connectedUser = new Dnew\User($req[$i]);
+			$connectedUser = new Dnew\User($req[$i]['id']);
 			echo "USER " . $connectedUser->serializeUser() . ";";
 		}
 
@@ -57,18 +62,19 @@ if (isset($_POST['user'])) {
 	else {
 		//On envoie les modifications depuis son absence
 		$req = $user->getModif();
-		echo "UPDATE_MAP;" . implode(";", $req) . ";";
+
+		if (count($req) != 0) {
+			echo "UPDATE_MAP;" . implode(";", $req) . ";";
+		}
+
 
 		//On envoie les joueurs déconnectés sur la map
 		$req = $bdd->prepare('SELECT id FROM user WHERE map=:map AND last_seen>=:timestamp-3 AND last_seen<=:timestamp-2');
-		$req->execute(array('map' => $map_info['name'], 'timestamp' => microtime(true)));
+		$req->execute(array('map' => $user->getMap(), 'timestamp' => microtime(true)));
 		$req = $req->fetchALL();
 
 		for ($i = 0; $i < count($req); $i++) {
 			echo "DISCONNECT " . $req[$i]['id'] . ";";
 		}
 	}
-
-	//Update last_seen
-	$user->updateLastSeen();
 }

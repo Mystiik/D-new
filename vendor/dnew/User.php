@@ -90,12 +90,16 @@ class User
 	private $initiative;
 
 
-	function sendModif($modif, $map_name = $this->getMap())
+	function sendModif($modif, $mapName = "")
 	{
 		global $bdd;
 
-		$req = $bdd->prepare('INSERT INTO modif (userId, mapName, modif, timestamp) VALUES (:id_user, :name_map, :modif, :timestamp)');
-		$req->execute(array('userId' => $this->getId(), 'mapName' => $map_name, 'modif' => $modif, 'timestamp' => microtime(true)));
+		if ($mapName == "") {
+			$mapName = $this->getMap();
+		}
+
+		$req = $bdd->prepare('INSERT INTO modif (userId, mapName, modif, timestamp) VALUES (:userId, :mapName, :modif, :timestamp)');
+		$req->execute(array('userId' => $this->getId(), 'mapName' => $mapName, 'modif' => $modif, 'timestamp' => microtime(true)));
 	}
 
 	function __construct(string $id)
@@ -119,7 +123,7 @@ class User
 		$this->setBouclier($infos['bouclier']);
 		$this->setBouclierMax($infos['bouclierMax']);
 		$this->setVitesse($infos['vitesse']);
-		$this->setPA($infos['pa']);
+		$this->setPA($infos['PA']);
 		$this->setPAMax($infos['PAMax']);
 		$this->setPM($infos['PM']);
 		$this->setPMMax($infos['PMMax']);
@@ -180,8 +184,7 @@ class User
 			$this->getBouclierMax() . " " .
 			$this->getVitesse() . " " .
 			$this->getPA() . " " .
-			$this->getPM() . " " .
-			";";
+			$this->getPM();
 	}
 
 
@@ -280,8 +283,8 @@ class User
 		global $bdd;
 		$this->lastSeen = microtime(true);
 
-		$req = $bdd->prepare('UPDATE user SET last_seen=:last_seen WHERE id=:id');
-		$req->execute(array('id' => $this->getId(), 'last_seen' => $this->lastSeen));
+		$req = $bdd->prepare('UPDATE user SET lastSeen=:lastSeen WHERE id=:id');
+		$req->execute(array('id' => $this->getId(), 'lastSeen' => $this->lastSeen));
 	}
 
 	public function getLastSeen()

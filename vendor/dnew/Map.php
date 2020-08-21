@@ -39,7 +39,7 @@ class Map
 		$infos = $this->getInfos();
 		$this->setMapInitial($infos['mapInitial']);
 		$this->setMapModif($infos['mapModif']);
-		$this->setDecor($infos['mapDecor']);
+		$this->setDecor($infos['decor']);
 		$this->setCombatPos($infos['combatPos']);
 	}
 
