@@ -1,0 +1,8 @@
+{
+  "autoload": {
+    "psr-4": {
+      "Dnew\\": "vendor/dnew/"
+    }
+  },
+  "require": {}
+}
