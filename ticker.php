@@ -21,13 +21,3 @@
 		$req = $bdd->prepare('UPDATE system SET timestamp=:timestamp WHERE type=:type');
 		$req->execute(array('type' => "ticker_fight", 'timestamp' => microtime(true)+0.2));
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-?>
