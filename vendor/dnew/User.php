@@ -193,7 +193,7 @@ class User
 	 *
 	 * @return array
 	 */
-	public function getModif()
+	public function getMapModif()
 	{
 		global $bdd;
 

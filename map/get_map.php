@@ -61,7 +61,7 @@ if (isset($_POST['user'])) {
 	// Si l'user s'est connecté récemment
 	else {
 		//On envoie les modifications depuis son absence
-		$req = $user->getModif();
+		$req = $user->getMapModif();
 
 		if (count($req) != 0) {
 			echo "UPDATE_MAP;" . implode(";", $req) . ";";
