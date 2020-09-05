@@ -7,6 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93
 {
     public static $prefixLengthsPsr4 = array (
+        'G' => 
+        array (
+            'GN\\LoaderCssJs\\' => 15,
+            'GN\\GlbObjFunc\\' => 14,
+        ),
         'D' => 
         array (
             'Dnew\\' => 5,
@@ -14,10 +19,26 @@ class ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93
     );
 
     public static $prefixDirsPsr4 = array (
+        'GN\\LoaderCssJs\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gnicolas/package/loader-css-js/src',
+        ),
+        'GN\\GlbObjFunc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/gnicolas/package/global-object-function',
+        ),
         'Dnew\\' => 
         array (
             0 => __DIR__ . '/..' . '/dnew',
         ),
+    );
+
+    public static $classMap = array (
+        'Dnew\\Map' => __DIR__ . '/..' . '/dnew/Map.php',
+        'Dnew\\User' => __DIR__ . '/..' . '/dnew/User.php',
+        'GN\\GlbObjFunc\\Hydrate' => __DIR__ . '/..' . '/gnicolas/package/global-object-function/Hydrate.php',
+        'GN\\GlbObjFunc\\__Get' => __DIR__ . '/..' . '/gnicolas/package/global-object-function/__Get.php',
+        'GN\\LoaderCssJs\\Loader' => __DIR__ . '/..' . '/gnicolas/package/loader-css-js/src/Loader.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
@@ -25,6 +46,7 @@ class ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93::$classMap;
 
         }, null, ClassLoader::class);
     }

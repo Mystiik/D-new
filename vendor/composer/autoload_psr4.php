@@ -6,5 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'GN\\LoaderCssJs\\' => array($vendorDir . '/gnicolas/package/loader-css-js/src'),
+    'GN\\GlbObjFunc\\' => array($vendorDir . '/gnicolas/package/global-object-function'),
     'Dnew\\' => array($vendorDir . '/dnew'),
 );

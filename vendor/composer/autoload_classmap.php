@@ -6,4 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Dnew\\Map' => $vendorDir . '/dnew/Map.php',
+    'Dnew\\User' => $vendorDir . '/dnew/User.php',
+    'GN\\GlbObjFunc\\Hydrate' => $vendorDir . '/gnicolas/package/global-object-function/Hydrate.php',
+    'GN\\GlbObjFunc\\__Get' => $vendorDir . '/gnicolas/package/global-object-function/__Get.php',
+    'GN\\LoaderCssJs\\Loader' => $vendorDir . '/gnicolas/package/loader-css-js/src/Loader.php',
 );

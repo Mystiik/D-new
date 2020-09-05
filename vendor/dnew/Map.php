@@ -2,8 +2,19 @@
 
 namespace Dnew;
 
+// Déclaration des méthodes manuellement car gérées automatiquement par \GN\GlbObjFunc\__Get
+/**
+ * @method getName()
+ * @method getMapInitial()
+ * @method getMapModif()
+ * @method getDecor()
+ * @method getCombatPos()
+ */
 class Map
 {
+	use \GN\GlbObjFunc\__Get;
+	use \GN\GlbObjFunc\Hydrate;
+
 	/**
 	 * @var string
 	 */
@@ -29,18 +40,32 @@ class Map
 	 */
 	private $combatPos;
 
-	// private $map_str;
-	// private $map_array;
 
 	function __construct(string $name)
 	{
-		$this->setName($name);
+		$this->name = $name;
 
 		$infos = $this->getInfos();
-		$this->setMapInitial($infos['mapInitial']);
-		$this->setMapModif($infos['mapModif']);
-		$this->setDecor($infos['decor']);
-		$this->setCombatPos($infos['combatPos']);
+		$this->hydrate($infos);
+	}
+
+	//-----------------------------------------------------------------------------------
+	// Basic function
+	//-----------------------------------------------------------------------------------
+
+	/**
+	 * Récupère les infos de la base
+	 *
+	 * @return array all columns from 'map' table
+	 */
+	private function getInfos()
+	{
+		global $bdd;
+
+		$req = $bdd->prepare('SELECT * FROM map WHERE name=:name');
+		$req->execute(array('name' => $this->getName()));
+
+		return $req->fetch(\PDO::FETCH_ASSOC);
 	}
 
 	/**
@@ -74,6 +99,9 @@ class Map
 
 		return $req;
 	}
+
+
+	//---------------------------------------------------------------------------------------------
 
 
 
@@ -154,71 +182,4 @@ class Map
 	// 	$req->execute(array('map_modif' => map_array_to_str($map), 'name' => $map_name));
 	// }
 
-
-	// ################################################################################################################################################
-	// ################################################################################################################################################
-	/**
-	 * Récupère les infos de la base
-	 *
-	 * @return array all columns from 'map' table
-	 */
-	public function getInfos()
-	{
-		global $bdd;
-
-		$req = $bdd->prepare('SELECT * FROM map WHERE name=:name');
-		$req->execute(array('name' => $this->getName()));
-
-		return $req->fetch(\PDO::FETCH_ASSOC);
-	}
-
-	public function setName(string $name)
-	{
-		$this->name = $name;
-	}
-
-	public function getName()
-	{
-		return $this->name;
-	}
-
-	public function setMapInitial(string $mapInitial)
-	{
-		$this->mapInitial = $mapInitial;
-	}
-
-	public function getMapInitial()
-	{
-		return $this->mapInitial;
-	}
-
-	public function setMapModif(string $mapModif)
-	{
-		$this->mapModif = $mapModif;
-	}
-
-	public function getMapModif()
-	{
-		return $this->mapModif;
-	}
-
-	public function setDecor(string $decor)
-	{
-		$this->decor = $decor;
-	}
-
-	public function getDecor()
-	{
-		return $this->decor;
-	}
-
-	public function setCombatPos(string $combatPos)
-	{
-		$this->combatPos = $combatPos;
-	}
-
-	public function getCombatPos()
-	{
-		return $this->combatPos;
-	}
 }

@@ -2,8 +2,31 @@
 
 namespace Dnew;
 
+// Déclaration des méthodes manuellement car gérées automatiquement par \GN\GlbObjFunc\__Get
+/**
+ * @method getId()
+ * @method getPseudo()
+ * @method getMap()
+ * @method getMapTmp()
+ * @method getPosition()
+ * @method getSkin()
+ * @method getLastSeen()
+ * @method getVie()
+ * @method getVieMax()
+ * @method getBouclier()
+ * @method getBouclierMax()
+ * @method getVitesse()
+ * @method getPA()
+ * @method getPAMax()
+ * @method getPM()
+ * @method getPMMax()
+ * @method getInitiative()
+ */
 class User
 {
+	use \GN\GlbObjFunc\__Get;
+	use \GN\GlbObjFunc\Hydrate;
+
 	/**
 	 * @var string
 	 */
@@ -90,21 +113,9 @@ class User
 	private $initiative;
 
 
-	function sendModif($modif, $mapName = "")
-	{
-		global $bdd;
-
-		if ($mapName == "") {
-			$mapName = $this->getMap();
-		}
-
-		$req = $bdd->prepare('INSERT INTO modif (userId, mapName, modif, timestamp) VALUES (:userId, :mapName, :modif, :timestamp)');
-		$req->execute(array('userId' => $this->getId(), 'mapName' => $mapName, 'modif' => $modif, 'timestamp' => microtime(true)));
-	}
-
 	function __construct(string $id)
 	{
-		$this->setId($id);
+		$this->id = $id;
 
 		// Si l'utilisateur se connecte pour la première fois, on le crée en bdd
 		if (!$this->isCreatedInBdd()) {
@@ -112,25 +123,13 @@ class User
 		}
 
 		$infos = $this->getInfos();
-		$this->setPseudo($infos['pseudo']);
-		$this->setMap($infos['map']);
-		$this->setMapTmp($infos['mapTmp']);
-		$this->setPosition($infos['position']);
-		$this->setSkin($infos['skin']);
-		$this->lastSeen = $infos['lastSeen'];
-		$this->setVie($infos['vie']);
-		$this->setVieMax($infos['vieMax']);
-		$this->setBouclier($infos['bouclier']);
-		$this->setBouclierMax($infos['bouclierMax']);
-		$this->setVitesse($infos['vitesse']);
-		$this->setPA($infos['PA']);
-		$this->setPAMax($infos['PAMax']);
-		$this->setPM($infos['PM']);
-		$this->setPMMax($infos['PMMax']);
-		$this->setinitiative($infos['initiative']);
+		$this->hydrate($infos);
 	}
 
-	public function isCreatedInBdd()
+	//-----------------------------------------------------------------------------------
+	// Basic function
+	//-----------------------------------------------------------------------------------
+	private function isCreatedInBdd()
 	{
 		global $bdd;
 
@@ -188,6 +187,21 @@ class User
 	}
 
 
+	public function sendModif($modif, $mapName = "")
+	{
+		global $bdd;
+
+		if ($mapName == "") {
+			$mapName = $this->getMap();
+		}
+
+		$req = $bdd->prepare('INSERT INTO modif (userId, mapName, modif, timestamp) VALUES (:userId, :mapName, :modif, :timestamp)');
+		$req->execute(array('userId' => $this->getId(), 'mapName' => $mapName, 'modif' => $modif, 'timestamp' => microtime(true)));
+	}
+
+
+	//-----------------------------------------------------------------------------------
+
 	/**
 	 * Contient les modifications de la map depuis notre dernière requête
 	 *
@@ -208,75 +222,6 @@ class User
 		return $req;
 	}
 
-	// ################################################################################################################################################
-	// ################################################################################################################################################
-
-	// Id
-	public function setId(string $id)
-	{
-		$this->id = $id;
-	}
-
-	public function getId()
-	{
-		return $this->id;
-	}
-
-	// Pseudo
-	public function setPseudo(string $pseudo)
-	{
-		$this->pseudo = $pseudo;
-	}
-
-	public function getPseudo()
-	{
-		return $this->pseudo;
-	}
-
-	// Map
-	public function setMap(string $map)
-	{
-		$this->map = $map;
-	}
-
-	public function getMap()
-	{
-		return $this->map;
-	}
-
-	// MapTmp
-	public function setMapTmp(string $mapTmp)
-	{
-		$this->mapTmp = $mapTmp;
-	}
-
-	public function getMapTmp()
-	{
-		return $this->mapTmp;
-	}
-
-	// Position
-	public function setPosition(string $position)
-	{
-		$this->position = $position;
-	}
-
-	public function getPosition()
-	{
-		return $this->position;
-	}
-
-	// Skin
-	public function setSkin(string $skin)
-	{
-		$this->skin = $skin;
-	}
-
-	public function getSkin()
-	{
-		return $this->skin;
-	}
-
 	// LastSeen
 	public function updateLastSeen()
 	{
@@ -285,120 +230,5 @@ class User
 
 		$req = $bdd->prepare('UPDATE user SET lastSeen=:lastSeen WHERE id=:id');
 		$req->execute(array('id' => $this->getId(), 'lastSeen' => $this->lastSeen));
-	}
-
-	public function getLastSeen()
-	{
-		return $this->lastSeen;
-	}
-
-	// Id
-	public function setVie(string $vie)
-	{
-		$this->vie = $vie;
-	}
-
-	public function getVie()
-	{
-		return $this->vie;
-	}
-
-	// VieMax
-	public function setVieMax(string $vieMax)
-	{
-		$this->vieMax = $vieMax;
-	}
-
-	public function getVieMax()
-	{
-		return $this->vieMax;
-	}
-
-	// Bouclier
-	public function setBouclier(string $bouclier)
-	{
-		$this->bouclier = $bouclier;
-	}
-
-	public function getBouclier()
-	{
-		return $this->bouclier;
-	}
-
-	// BouclierMax
-	public function setBouclierMax(string $bouclierMax)
-	{
-		$this->bouclierMax = $bouclierMax;
-	}
-
-	public function getBouclierMax()
-	{
-		return $this->bouclierMax;
-	}
-
-	// Vitesse
-	public function setVitesse(string $vitesse)
-	{
-		$this->vitesse = $vitesse;
-	}
-
-	public function getVitesse()
-	{
-		return $this->vitesse;
-	}
-
-	// PA
-	public function setPA(string $PA)
-	{
-		$this->PA = $PA;
-	}
-
-	public function getPA()
-	{
-		return $this->PA;
-	}
-
-	// PAMax
-	public function setPAMax(string $PAMax)
-	{
-		$this->PAMax = $PAMax;
-	}
-
-	public function getPAMax()
-	{
-		return $this->PAMax;
-	}
-
-	// PM
-	public function setPM(string $PM)
-	{
-		$this->PM = $PM;
-	}
-
-	public function getPM()
-	{
-		return $this->PM;
-	}
-
-	// PMMax
-	public function setPMMax(string $PMMax)
-	{
-		$this->PMMax = $PMMax;
-	}
-
-	public function getPMMax()
-	{
-		return $this->PMMax;
-	}
-
-	// Initiative
-	public function setInitiative(string $initiative)
-	{
-		$this->initiative = $initiative;
-	}
-
-	public function getInitiative()
-	{
-		return $this->initiative;
 	}
 }
