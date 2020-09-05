@@ -2,10 +2,12 @@
   "autoload": {
     "psr-4": {
       "Dnew\\": "vendor/dnew/",
-      "GN\\LoaderCssJs\\": [
-        "vendor/gnicolas/package/loader-css-js/src/"
-      ],
-      "GN\\GlbObjFunc\\": "vendor/gnicolas/package/global-object-function/"
+      "GN\\LoaderCssJs\\": "vendor/gnicolas/package/loader-css-js/src/",
+      "GN\\GlbObjFunc\\": "vendor/gnicolas/package/global-object-function/",
+      "MultipleFolder\\": [
+        "Folder1/",
+        "Folder2/"
+      ]
     }
   },
   "require": {}
