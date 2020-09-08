@@ -7,6 +7,10 @@ namespace Composer\Autoload;
 class ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93
 {
     public static $prefixLengthsPsr4 = array (
+        'M' => 
+        array (
+            'MultipleFolder\\' => 15,
+        ),
         'G' => 
         array (
             'GN\\LoaderCssJs\\' => 15,
@@ -19,6 +23,11 @@ class ComposerStaticInit3f9a07bb9d5200ae70b5050199540d93
     );
 
     public static $prefixDirsPsr4 = array (
+        'MultipleFolder\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/Folder1',
+            1 => __DIR__ . '/../..' . '/Folder2',
+        ),
         'GN\\LoaderCssJs\\' => 
         array (
             0 => __DIR__ . '/..' . '/gnicolas/package/loader-css-js/src',

@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'MultipleFolder\\' => array($baseDir . '/Folder1', $baseDir . '/Folder2'),
     'GN\\LoaderCssJs\\' => array($vendorDir . '/gnicolas/package/loader-css-js/src'),
     'GN\\GlbObjFunc\\' => array($vendorDir . '/gnicolas/package/global-object-function'),
     'Dnew\\' => array($vendorDir . '/dnew'),
