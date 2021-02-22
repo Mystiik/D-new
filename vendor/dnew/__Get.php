@@ -1,9 +1,6 @@
 <?php
 
-namespace GN\GlbObjFunc;
-
-trait __Get
-{
+trait __Get {
 	// La fonction __call enlève la génération de doc automatique
 	// Y palier: https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html
 	// Exemple à mettre au dessus de la classe en question:
@@ -14,8 +11,7 @@ trait __Get
 	 * @method static string staticGetter()
 	 */
 	// Fin de l'exemple
-	public function __call($name, $arguments)
-	{
+	public function __call($name, $arguments) {
 		//---------------------------------------------------------------------------
 		// Automatic getter
 		//---------------------------------------------------------------------------
