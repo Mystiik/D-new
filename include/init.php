@@ -2,7 +2,7 @@
 //date_default_timezone_set("Europe/Paris");
 
 // Define ROOT
-define("__ROOT__", $_SERVER['DOCUMENT_ROOT']);
+define("__ROOT__", dirname(__DIR__));
 
 // Autoloader
 spl_autoload_register(function ($class_name) {
