@@ -8,7 +8,7 @@ include_once('include/init.php');
 error_reporting(E_ALL);
 
 if (file_exists(Server::$savePath . '/save.txt')) {
-  $_world = unserialize(file_get_contents(Server::$savePath . '/save.txt'));
+  $_world = \test\Serializer::unserialize(file_get_contents(Server::$savePath . '/save.txt'));
 } else {
   // Initialisation
   $_world = [];
@@ -18,6 +18,10 @@ if (file_exists(Server::$savePath . '/save.txt')) {
   $map->generate();
   $_world['map'][] = $map;
 }
+
+// Tickers
+$_world['ticker']['saveWorld'] = time() + 60;
+$_world['ticker']['printServerInfo'] = time() + 60;
 
 //----------------------------------------------------------------------------------------------------------------
 // Opening all files
@@ -64,5 +68,39 @@ while (true) {
         echo "Impossible de verrouiller le fichier !";
       }
     }
+  }
+
+  //----------------------------------------------------------------------------------------------------------------
+  // TICKERS
+  //----------------------------------------------------------------------------------------------------------------
+  // SaveWorld
+  if (time() >= $_world['ticker']['saveWorld']) {
+    $fileDefault = fopen(Server::$savePath . 'save.txt', 'w');
+    $file = fopen(Server::$savePath . 'save' . time() . '.txt', 'w');
+
+    $_worldSerialized = \test\Serializer::serialize($_world);
+
+    fwrite($fileDefault, $_worldSerialized);
+    fwrite($file, $_worldSerialized);
+    fclose($fileDefault);
+    fclose($file);
+
+    $_world['ticker']['saveWorld'] = time() + 60;
+  }
+
+  // PrintServerInfo
+  if (time() >= $_world['ticker']['printServerInfo']) {
+    $memoryUsageMb = round(memory_get_usage() / 1000 / 1000, 2);
+    $memoryLimitMb = ini_get('memory_limit');
+    $memoryLimitMb = str_replace('K', '000', $memoryLimitMb);
+    $memoryLimitMb = str_replace('M', '000000', $memoryLimitMb);
+    $memoryLimitMb = round($memoryLimitMb / 1000 / 1000, 2);
+    $ratio = round($memoryUsageMb / $memoryLimitMb * 100, 2);
+
+    echo PHP_EOL . "SERVER_INFO" . PHP_EOL;
+    echo "-- Memory usage: $memoryUsageMb Mb ($ratio%)" . PHP_EOL;
+    echo "-- Memory limit: $memoryLimitMb Mb" . PHP_EOL;
+
+    $_world['ticker']['printServerInfo'] = time() + 60;
   }
 }
