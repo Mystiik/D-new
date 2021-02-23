@@ -7,7 +7,17 @@
 include_once('include/init.php');
 error_reporting(E_ALL);
 
+if (file_exists(Server::$savePath . '/save.txt')) {
+  $_world = unserialize(file_get_contents(Server::$savePath . '/save.txt'));
+} else {
+  // Initialisation
+  $_world = [];
 
+  // Generate map
+  $map = new Map();
+  $map->generate();
+  $_world['map'][] = $map;
+}
 
 //----------------------------------------------------------------------------------------------------------------
 // Opening all files
