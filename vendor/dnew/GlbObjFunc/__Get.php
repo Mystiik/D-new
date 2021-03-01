@@ -1,5 +1,7 @@
 <?php
 
+namespace GlbObjFunc;
+
 trait __Get {
 	// La fonction __call enlève la génération de doc automatique
 	// Y palier: https://docs.phpdoc.org/latest/references/phpdoc/tags/method.html

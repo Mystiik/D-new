@@ -7,7 +7,7 @@
  * @method getCommunicationNumber()
  */
 class Server {
-  use \__Get;
+  use \GlbObjFunc\__Get;
 
   public static $savePath = __ROOT__ . '/server/save/';
   public static $communicationPath = __ROOT__ . '/server/com/';

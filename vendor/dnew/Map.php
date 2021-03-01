@@ -1,21 +1,17 @@
 <?php
 
-// Déclaration des méthodes manuellement car gérées automatiquement par \__Get
-/**
- * @method getSavePath()
- * @method getCommunicationPath()
- * @method getCommunicationNumber()
- */
 class Map {
-	use \__Get;
+	// use \GlbObjFunc\__Get;
 
-	public static $savePath = __ROOT__ . '/server/save/';
-	public static $communicationPath = __ROOT__ . '/server/com/';
-	public static $communicationNumber = 1000;
+	public $tileList = [];
+	public $itemList = [];
+	public $buildingList = [];
+	public $posX = null;
+	public $posY = null;
+	public $biomeType = null;
 
-	public function __construct() {
-	}
-
-	public function generate() {
+	public function __construct($biomeType = \Biome\Biome::GRASS) {
+		$this->biomeType = $biomeType;
+		$this->tileList[] = new Tile($biomeType);
 	}
 }
