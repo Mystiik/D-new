@@ -1,8 +1,8 @@
 <?php
 
-namespace Item;
+namespace Object\Collectible;
 
-class Collectible {
+class __Base {
   // use \GlbObjFunc\__Get;
 
   public $type = '';

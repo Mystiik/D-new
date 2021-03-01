@@ -1,8 +1,8 @@
 <?php
 
-namespace Item;
+namespace Object\Building;
 
-class Building {
+class __Base {
 	// use \GlbObjFunc\__Get;
 
 	public $type = '';

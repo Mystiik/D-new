@@ -1,11 +1,13 @@
 <?php
 
-namespace Item;
+namespace Object\Building;
 
-class Tree {
+use \Action\Action;
+
+class RockMine extends __Base {
 	// use \GlbObjFunc\__Get;
 
 	public $type = '';
 	public $coordinate = \GlbObjFunc\Coordinate::set();
-	// public $level = '';
+	public $level = '';
 }
