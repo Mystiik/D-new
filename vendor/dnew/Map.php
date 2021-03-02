@@ -1,11 +1,11 @@
 <?php
 
 class Map {
-	// use \GlbObjFunc\__Get;
+	const SIZE_X = 12;
+	const SIZE_Y = 12;
 
 	public $tileList = [];
-	public $itemList = [];
-	public $buildingList = [];
+	public $objectList = [];
 	public $posX = null;
 	public $posY = null;
 	public $biomeType = null;

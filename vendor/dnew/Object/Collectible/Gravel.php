@@ -2,21 +2,21 @@
 
 namespace Object\Collectible;
 
-use \Action\Action;
+use \GlbObjFunc\Gain;
 
 class Gravel extends __Base {
-  // use \GlbObjFunc\__Get;
-
   // Ressource
-  const TYPE = 'GRAVEL';
-  const RESSOURCE_TYPE = 'ROCK';
-  const FORAGING_TIME = 1.5;
-  public $ressourceNumber = 3;
+  public $_ROCK = 3;
+
+  // Size
+  public static $sizeX = 1;
+  public static $sizeY = 1;
 
   // Action
-  const ACTION = [Action::PICK_UP];
-
-  // Coordinate
-  public $coordinate = \GlbObjFunc\Coordinate::set();
-  public $direction = 0;
+  public static $action = [];
+  public static function __constructStatic() {
+    self::$action[] = new \Action\PickUp('NONE', 1.5, [
+      new Gain('ROCK', 0.5, 3, 5)
+    ]);
+  }
 }

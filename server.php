@@ -8,14 +8,19 @@ error_reporting(E_ALL);
 
 include_once('include/init.php');
 
-if (file_exists(Server::$savePath . '/save.txt')) {
+// if (file_exists(Server::$savePath . '/save.txt')) {
+if (false) {
   $_world = GlbObjFunc\Serializer::unserialize(file_get_contents(Server::$savePath . '/save.txt'));
 } else {
   // Initialisation
   $_world = [];
 
   // Map
-  $_world['map'][] = World\MapFactory::init();
+  for ($x = 1; $x <= World::SIZE_X; $x++) {
+    for ($y = 1; $y <= World::SIZE_Y; $y++) {
+      $_world['map'][] = Biome\Grass::mapCreate($x, $y);
+    }
+  }
 }
 
 // Tickers

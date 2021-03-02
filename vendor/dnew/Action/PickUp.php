@@ -3,6 +3,6 @@
 namespace Action;
 
 class PickUp {
-  public static function action($obj) {
+  public function __construct($toolType, $actionDuration, $gain = [], $requirement = []) {
   }
 }

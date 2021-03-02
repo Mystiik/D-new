@@ -3,9 +3,13 @@
 namespace Object\Collectible;
 
 class __Base {
-  // use \GlbObjFunc\__Get;
+  // Coordinate
+  public $posX = 0;
+  public $posY = 0;
+  public $direction = 0;
 
-  public $type = '';
-  public $coordinate = \GlbObjFunc\Coordinate::set();
-  public $level = '';
+  public function __construct($posX = 0, $posY = 0) {
+    $this->posX = $posX;
+    $this->posY = $posY;
+  }
 }

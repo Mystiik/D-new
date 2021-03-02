@@ -3,6 +3,6 @@
 namespace Action;
 
 class Chop {
-  public static function action($obj) {
+  public function __construct($toolType, $actionDuration, $gain = [], $requirement = []) {
   }
 }

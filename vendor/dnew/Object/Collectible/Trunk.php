@@ -2,21 +2,21 @@
 
 namespace Object\Collectible;
 
-use \Action\Action;
+use \GlbObjFunc\Gain;
 
 class Trunk extends __Base {
-  // use \GlbObjFunc\__Get;
-
   // Ressource
-  const TYPE = 'TRUNK';
-  const RESSOURCE_TYPE = 'WOOD';
-  const FORAGING_TIME = 1.5;
-  public $ressourceNumber = 8;
+  public $_WOOD = 3;
+
+  // Size
+  public static $sizeX = 1;
+  public static $sizeY = 1;
 
   // Action
-  const ACTION = [Action::CHOP];
-
-  // Coordinate
-  public $coordinate = \GlbObjFunc\Coordinate::set();
-  public $direction = 0;
+  public static $action = [];
+  public static function __constructStatic() {
+    self::$action[] = new \Action\Chop('AXE', 1.5, [
+      new Gain('WOOD', 0.5, 3, 5)
+    ]);
+  }
 }
