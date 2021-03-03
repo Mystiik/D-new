@@ -18,7 +18,7 @@ if (false) {
   // Map
   for ($x = 1; $x <= World::SIZE_X; $x++) {
     for ($y = 1; $y <= World::SIZE_Y; $y++) {
-      $_world['map'][] = Biome\Grass::mapCreate($x, $y);
+      $_world['map'][$x][$y] = Biome\Grass::mapCreate();
     }
   }
 }

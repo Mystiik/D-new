@@ -6,8 +6,6 @@ class Map {
 
 	public $tileList = [];
 	public $objectList = [];
-	public $posX = null;
-	public $posY = null;
 	public $biomeType = null;
 
 	public function __construct($biomeType = \Biome\Biome::GRASS) {

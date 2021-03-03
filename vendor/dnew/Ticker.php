@@ -1,5 +1,4 @@
 <?php
-global $_world;
 class Ticker {
 
   public static function tickerInit() {
@@ -55,6 +54,7 @@ class Ticker {
       echo PHP_EOL . "SERVER_INFO" . PHP_EOL;
       echo "-- Memory usage: $memoryUsageMb Mb ($ratio%)" . PHP_EOL;
       echo "-- Memory limit: $memoryLimitMb Mb" . PHP_EOL;
+      echo PHP_EOL;
 
       self::printServerInfoSetTicker();
     }
