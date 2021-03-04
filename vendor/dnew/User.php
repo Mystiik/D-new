@@ -4,20 +4,38 @@ class User {
   public $id = '';
   public $ipAdress = [];
   public $inventory = null;
-  public $mapPosX = round(\World::SIZE_X / 2);
-  public $mapPosY = round(\World::SIZE_Y / 2);
+  public $mapPosX = 0;
+  public $mapPosY = 0;
 
-  public function __construct() {
+  public function __construct($ipAdress = null) {
+    // Initialisation
+    $this->id = self::generateId();
     // $this->inventory = new Inventory();
+    $this->mapPosX = round(\World::SIZE_X / 2);
+    $this->mapPosY = round(\World::SIZE_Y / 2);
+    $this->addIpAdress($ipAdress);
+
+    // World
+    global $_world;
+    $_world['user'][$this->id] = $this;
   }
 
+  public function addIpAdress($ipAdress = null) {
+    global $_world;
+    if (isset($ipAdress)) {
+      $this->ipAdress[] = $ipAdress;
+      $_world['list']['ipToUser'][$ipAdress] = $this;
+    }
+  }
+
+  //-------------------------------------------------------------------------------------------------
+  // STATIC
+  //-------------------------------------------------------------------------------------------------
   public static function isValidId(string $id) {
     if (!preg_match('/[^A-Za-z0-9]/', $id)) {
       return true;
-    } else {
-      // Flag Hack
-      return false;
     }
+    return false;
   }
 
   public static function generateId() {

@@ -4,6 +4,9 @@
 //----------------------------------------------------------------------------------------------------------------
 // Initialisation
 //----------------------------------------------------------------------------------------------------------------
+
+use GlbObjFunc\Text;
+
 error_reporting(E_ALL);
 
 include_once('include/init.php');
@@ -14,11 +17,15 @@ if (false) {
 } else {
   // Initialisation
   $_world = [];
+  $_world['list'] = [];
+  $_world['list']['ipToUser'] = [];
+  $_world['user'] = [];
+  $_world['warning'] = [];
 
   // Map
   for ($x = 1; $x <= World::SIZE_X; $x++) {
     for ($y = 1; $y <= World::SIZE_Y; $y++) {
-      $_world['map'][$x][$y] = Biome\Grass::mapCreate();
+      $_world['map'][$x][$y] = Biome\Grass::mapCreate($x, $y);
     }
   }
 }
@@ -42,25 +49,50 @@ while (true) {
     rewind($file);
     if (@fread($file, 8) != 'REQUEST|') continue;
 
-    $response = "";
     $data = fread($file, 2048);
 
+    //----------------------------------------------------------------------------------------------------------------
     // Handle message
+    //----------------------------------------------------------------------------------------------------------------
     if (!empty($data)) {
-
-      // Receive message
+      // Initialisation
+      $response = '';
       $data = explode('|', $data);
-      foreach ($data as $message) {
-        //----------------------------------------------------------------------------------------------------------------
-        // DO STUFF
-        //----------------------------------------------------------------------------------------------------------------
-        echo "Message received: $message: " . strlen($message) . PHP_EOL;
-        $response .= "You sent: $message";
+      $ip = $data[0];
+      $userId = $data[1];
+      unset($data[0]);
+      unset($data[1]);
+
+      if (User::isValidId($userId)) {
+        // Get user
+        if ($userId == 'NOID') $user = new User($ip);
+        else $user = $_world['user'][$userId] ?? null;
+
+        if ($user != null) {
+          foreach ($data as $message) {
+            $message = explode(';', $message);
+
+            if (strlen(trim($message[0])) > 0) {
+              $command = '\\Command\\' . Text::camelCase($message[0]);
+
+              if (is_callable([$command, 'command'])) {
+                $response .= $command::command($user, $ip, $message) . '|';
+              } else {
+                // warning ?
+                echo $command . '::command() as been commanded line ' . (__LINE__ - 3) . ' but isn\'t callable' . PHP_EOL;
+                echo 'Params: [' . implode(';', $message) . ']' . PHP_EOL;
+              }
+            }
+          }
+        } else {
+          Security::addWarning($ip, Security::FAKE_USER_ID);
+        }
+      } else {
+        Security::addWarning($ip, Security::FAKE_USER_ID);
       }
 
-      //----------------------------------------------------------------------------------------------------------------
-      // SEND RESPONSE
-      //----------------------------------------------------------------------------------------------------------------
+
+      // Send response
       if (flock($file, LOCK_EX)) {
         ftruncate($file, 0);
         rewind($file);
