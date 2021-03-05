@@ -64,11 +64,14 @@ while (true) {
       unset($data[1]);
 
       if (User::isValidId($userId)) {
-        // Get user
         if ($userId == 'NOID') $user = new User($ip);
         else $user = $_world['user'][$userId] ?? null;
 
         if ($user != null) {
+          // Send User info
+          $response .= 'USER,' . $user->id . ',' . $user->mapPosX . ',' . $user->mapPosX . '|';
+
+          //
           foreach ($data as $message) {
             $message = explode(';', $message);
 
@@ -76,11 +79,10 @@ while (true) {
               $command = '\\Command\\' . Text::camelCase($message[0]);
 
               if (is_callable([$command, 'command'])) {
-                $response .= $command::command($user, $ip, $message) . '|';
+                $response .= $command::command($user, $ip, $message);
               } else {
                 // warning ?
-                echo $command . '::command() as been commanded line ' . (__LINE__ - 3) . ' but isn\'t callable' . PHP_EOL;
-                echo 'Params: [' . implode(';', $message) . ']' . PHP_EOL;
+                echo $command . '::command() as been commanded line ' . (__LINE__ - 3) . ' but isn\'t callable: [' . implode(';', $message) . ']' . PHP_EOL;
               }
             }
           }

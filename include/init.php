@@ -9,8 +9,13 @@ define("DAY", 24 * HOUR);
 
 // Autoloader
 spl_autoload_register(function ($class_name) {
-  include_once __ROOT__ . "/vendor/dnew/$class_name.php";
-  if (is_callable([$class_name, "__constructStatic"])) {
-    $class_name::__constructStatic();
+  $path = __ROOT__ . "/vendor/dnew/$class_name.php";
+  if (file_exists($path)) {
+    include_once $path;
+    if (is_callable([$class_name, "__constructStatic"])) {
+      $class_name::__constructStatic();
+    }
+  } else {
+    echo "Tried to load $class_name but failed" . PHP_EOL;
   }
 });

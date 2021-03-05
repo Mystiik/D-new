@@ -10,7 +10,7 @@ class Map {
     $response = '';
     $centerX = $user->mapPosX;
     $centerY = $user->mapPosY;
-    $rayon = 3; // 2 -> 13 maps, 3 -> 25 maps
+    $rayon = 2; // 2 -> 13 maps, 3 -> 25 maps
 
     $response .= 'WORLD,' . \World::SIZE_X . ',' . \World::SIZE_Y . '|';
 
@@ -27,19 +27,6 @@ class Map {
         }
       }
     }
-
-    // for ($x = -$rayon; $x <= $rayon; $x++) {
-    //   for ($y = -$rayon; $y <= $rayon; $y++) {
-    //     $map = $_world['map'][$centerX + $x][$centerY + $y];
-    //     // Map + Object
-    //     if (0 <= $rayon and $rayon <= 3) {
-    //       $response .= $map->getMapCompressedToSend() . '|';
-    //     } else {
-    //       // Map only
-    //       $response .= 'MAP,' . $map->biomeType . ',' . $map->posX . ',' . $map->posY . ';' . '|';
-    //     }
-    //   }
-    // }
     return $response;
   }
 }
