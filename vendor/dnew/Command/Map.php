@@ -12,7 +12,7 @@ class Map {
     $centerY = $user->mapPosY;
     $rayon = 3; // 2 -> 13 maps, 3 -> 25 maps
 
-    $response .= 'WORLD,' . \World::SIZE_X . ',' . \World::SIZE_Y . '|';
+    $response .= 'WORLD,' . \World::SIZE_X . ',' . \World::SIZE_Y  . ',' . \Map::SIZE_Y  . ',' . \Map::SIZE_Y . '|';
 
     for ($x = -$rayon; $x <= $rayon; $x++) {
       $rangeY = $rayon - abs($x);

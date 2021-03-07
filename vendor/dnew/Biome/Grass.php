@@ -14,13 +14,13 @@ class Grass implements Biome {
 		$map->posX = $posX;
 		$map->posY = $posY;
 		$objectList = [];
-		for ($x = 1; $x <= \Map::SIZE_X; $x++) {
-			for ($y = 1; $y <= \Map::SIZE_Y; $y++) {
+		for ($x = 1; $x < \Map::SIZE_X - 1; $x++) {
+			for ($y = 1; $y < \Map::SIZE_Y - 1; $y++) {
 				$rand = rand(0, 100);
 				switch (true) {
-					case (0 <= $rand and $rand <= 0):
-						$objectList[] = new Collectible\Branch($x, $y);
-						break;
+						// case (0 <= $rand and $rand <= 0):
+						// 	$objectList[] = new Collectible\Branch($x, $y);
+						// 	break;
 					case (1 <= $rand and $rand <= 1):
 						$objectList[] = new Collectible\Gravel($x, $y);
 						break;

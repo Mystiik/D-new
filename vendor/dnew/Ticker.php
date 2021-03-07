@@ -34,7 +34,7 @@ class Ticker {
 
   private static function saveWorldSetTicker() {
     global $_world;
-    $_world['ticker']['saveWorld'] = time() + 60;
+    $_world['ticker']['saveWorld'] = time() + HOUR;
   }
 
   //---------------------------------------------------------------------------------------------
@@ -62,6 +62,6 @@ class Ticker {
 
   private static function printServerInfoSetTicker() {
     global $_world;
-    $_world['ticker']['printServerInfo'] = time() + 60;
+    $_world['ticker']['printServerInfo'] = time() + MINUTE;
   }
 }

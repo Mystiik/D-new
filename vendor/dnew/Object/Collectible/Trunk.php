@@ -7,7 +7,7 @@ use \GlbObjFunc\Text;
 
 class Trunk extends __Base {
   // Ressource
-  public $_WOOD = 3;
+  public $_WOOD = 8;
 
   // Size
   public static $sizeX = 1;
