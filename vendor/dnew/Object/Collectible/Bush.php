@@ -5,10 +5,9 @@ namespace Object\Collectible;
 use \GlbObjFunc\Gain;
 use \GlbObjFunc\Text;
 
-class Gravel extends __Base {
+class Bush extends __Base {
   // Ressource
-  public $_ROCK = 3;
-  public $skinId = 0;
+  public $_Berry = 5;
 
   // Size
   public static $sizeX = 1;
@@ -20,8 +19,14 @@ class Gravel extends __Base {
 
   public static function __constructStatic() {
     self::$action[] = new \Action\PickUp('NONE', 1.5, [
-      new Gain('ROCK', 0.5, 3, 5)
+      new Gain('Berry', 1, 1, 3)
     ]);
     self::$class = Text::getClassName(__CLASS__);
+  }
+
+  // Skin
+  public function __construct($posX = 0, $posY = 0) {
+    $this->skinId = rand(0, 3);
+    parent::__construct($posX, $posY);
   }
 }

@@ -30,6 +30,15 @@ class Grass implements Biome {
 					case (3 <= $rand and $rand <= 3):
 						$objectList[] = new Collectible\Trunk($x, $y);
 						break;
+					case (4 <= $rand and $rand <= 6):
+						$objectList[] = new Collectible\Flower($x, $y);
+						break;
+					case (7 <= $rand and $rand <= 8):
+						$objectList[] = new Collectible\Bush($x, $y);
+						break;
+					case (9 <= $rand and $rand <= 12):
+						$objectList[] = new Collectible\Plant($x, $y);
+						break;
 				}
 			}
 		}

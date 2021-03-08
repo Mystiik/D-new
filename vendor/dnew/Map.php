@@ -22,7 +22,7 @@ class Map {
 
 			foreach ($this->objectList as $obj) {
 				$class = $obj::class;
-				$mapCompressed .=  $obj::$class . ',' . $obj->posX . ',' . $obj->posY . ',' . $obj->direction . ',' . $class::$sizeX . ',' . $class::$sizeY . ';';
+				$mapCompressed .=  $obj::$class . ',' . $obj->posX . ',' . $obj->posY . ',' . $obj->direction . ',' . $class::$sizeX . ',' . $class::$sizeY . ',' . $obj->skinId . ';';
 			}
 
 			$this->mapCompressedToSend = $mapCompressed;

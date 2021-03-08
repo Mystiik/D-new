@@ -8,6 +8,7 @@ use \GlbObjFunc\Text;
 class Trunk extends __Base {
   // Ressource
   public $_WOOD = 8;
+  public $skinId = 0;
 
   // Size
   public static $sizeX = 1;

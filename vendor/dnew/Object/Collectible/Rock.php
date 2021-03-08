@@ -8,6 +8,7 @@ use \GlbObjFunc\Text;
 class Rock extends __Base {
   // Ressource
   public $_ROCK = 8;
+  public $skinId = 0;
 
   // Size
   public static $sizeX = 1;
