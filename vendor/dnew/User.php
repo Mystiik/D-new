@@ -4,6 +4,7 @@ class User {
   public $id = '';
   public $ipAdress = [];
   public $inventory = null;
+  public $characterList = [];
   public $mapPosX = 0;
   public $mapPosY = 0;
 
@@ -13,6 +14,7 @@ class User {
     // $this->inventory = new Inventory();
     $this->mapPosX = round(\World::SIZE_X / 2);
     $this->mapPosY = round(\World::SIZE_Y / 2);
+    $this->characterList[] = new Character($this->mapPosX, $this->mapPosY);
     $this->addIpAdress($ipAdress);
 
     // World
@@ -39,7 +41,7 @@ class User {
   }
 
   public static function generateId() {
-    $array = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+    $array = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
     $id = '';
     for ($i = 0; $i < 20; $i++) {

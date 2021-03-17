@@ -23,7 +23,7 @@ class Map {
 
         // Map + Object
         $range = abs($x) + abs($y);
-        if (0 <= $rayon and $rayon <= 3 and $range < $rayon) {
+        if (0 <= $rayon and $rayon <= 3 + 1 and $range < $rayon) {
           $response .= $map->getMapCompressedToSend() . '|';
         } else {
           // Map only
