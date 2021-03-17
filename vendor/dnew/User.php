@@ -5,16 +5,16 @@ class User {
   public $ipAdress = [];
   public $inventory = null;
   public $characterList = [];
-  public $mapPosX = 0;
-  public $mapPosY = 0;
+  public $mapX = 0;
+  public $mapY = 0;
 
   public function __construct($ipAdress = null) {
     // Initialisation
     $this->id = self::generateId();
     // $this->inventory = new Inventory();
-    $this->mapPosX = round(\World::SIZE_X / 2);
-    $this->mapPosY = round(\World::SIZE_Y / 2);
-    $this->characterList[] = new Character($this->mapPosX, $this->mapPosY);
+    $this->mapX = round(\World::SIZE_X / 2);
+    $this->mapY = round(\World::SIZE_Y / 2);
+    $this->characterList[] = new Character($this->mapX, $this->mapY);
     $this->addIpAdress($ipAdress);
 
     // World

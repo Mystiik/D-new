@@ -9,10 +9,10 @@ use \Object\Flora;
 class Grass implements Biome {
 	// use \GlbObjFunc\__Get;
 
-	public static function mapCreate($posX = 0, $posY = 0) {
+	public static function mapCreate($mapX = 0, $mapY = 0) {
 		$map = new \Map(Biome::GRASS);
-		$map->posX = $posX;
-		$map->posY = $posY;
+		$map->mapX = $mapX;
+		$map->mapY = $mapY;
 		$objectList = [];
 		for ($x = 1; $x < \Map::SIZE_X - 1; $x++) {
 			for ($y = 1; $y < \Map::SIZE_Y - 1; $y++) {

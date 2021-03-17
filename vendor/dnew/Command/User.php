@@ -10,7 +10,7 @@ class User {
     $response = '';
 
     foreach ($user->characterList as $charac) {
-      $response .= 'CHARACTER' . ',' . $charac->mapPosX . ',' . $charac->mapPosY . ',' . $charac->posX . ',' . $charac->posY . '|';
+      $response .= 'CHARACTER' . ',' . $charac->mapX . ',' . $charac->mapY . ',' . $charac->tileX . ',' . $charac->tileY . '|';
     }
 
     return $response;

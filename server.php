@@ -69,7 +69,7 @@ while (true) {
 
         if ($user != null) {
           // Send User info
-          $response .= 'USER,' . $user->id . ',' . $user->mapPosX . ',' . $user->mapPosX . '|';
+          $response .= 'USER,' . $user->id . ',' . $user->mapX . ',' . $user->mapX . '|';
 
           //
           foreach ($data as $message) {

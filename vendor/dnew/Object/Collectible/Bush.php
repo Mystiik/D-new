@@ -25,8 +25,8 @@ class Bush extends __Base {
   }
 
   // Skin
-  public function __construct($posX = 0, $posY = 0) {
+  public function __construct($tileX = 0, $tileY = 0) {
     $this->skinId = rand(0, 3);
-    parent::__construct($posX, $posY);
+    parent::__construct($tileX, $tileY);
   }
 }

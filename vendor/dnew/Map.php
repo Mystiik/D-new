@@ -4,8 +4,8 @@ class Map {
 	const SIZE_X = 12;
 	const SIZE_Y = 12;
 
-	public $posX = 0;
-	public $posY = 0;
+	public $mapX = 0;
+	public $mapY = 0;
 	public $tileList = [];
 	public $objectList = [];
 	public $biomeType = null;
@@ -18,11 +18,11 @@ class Map {
 
 	public function getMapCompressedToSend() {
 		if ($this->mapCompressedToSend == null) {
-			$mapCompressed = 'MAP,' . $this->biomeType . ',' . $this->posX . ',' . $this->posY . ';';
+			$mapCompressed = 'MAP,' . $this->biomeType . ',' . $this->mapX . ',' . $this->mapY . ';';
 
 			foreach ($this->objectList as $obj) {
 				$class = $obj::class;
-				$mapCompressed .=  $obj::$class . ',' . $obj->posX . ',' . $obj->posY . ',' . $obj->direction . ',' . $class::$sizeX . ',' . $class::$sizeY . ',' . $obj->skinId . ';';
+				$mapCompressed .=  $obj::$class . ',' . $obj->tileX . ',' . $obj->tileY . ',' . $obj->direction . ',' . $class::$sizeX . ',' . $class::$sizeY . ',' . $obj->skinId . ';';
 			}
 
 			$this->mapCompressedToSend = $mapCompressed;

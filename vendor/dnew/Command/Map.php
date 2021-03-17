@@ -8,8 +8,8 @@ class Map {
     global $_world;
 
     $response = '';
-    $centerX = $params[1] ?? $user->mapPosX;
-    $centerY = $params[2] ?? $user->mapPosY;
+    $centerX = $params[1] ?? $user->mapX;
+    $centerY = $params[2] ?? $user->mapY;
     $rayon = $params[3] ?? 2; // 2 -> 13 maps, 3 -> 25 maps
     $rayon++; // create a border
 
@@ -27,7 +27,7 @@ class Map {
           $response .= $map->getMapCompressedToSend() . '|';
         } else {
           // Map only
-          $response .= 'MAP,' . $map->biomeType . ',' . $map->posX . ',' . $map->posY . ';' . '|';
+          $response .= 'MAP,' . $map->biomeType . ',' . $map->mapX . ',' . $map->mapY . ';' . '|';
         }
       }
     }

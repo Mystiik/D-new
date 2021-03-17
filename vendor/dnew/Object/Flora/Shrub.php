@@ -19,7 +19,7 @@ class Tree extends __Base {
   const SIZE_Y = 1;
 
   // Coordinate
-  public $posX = 0;
-  public $posY = 0;
+  public $tileX = 0;
+  public $tileY = 0;
   public $direction = 0;
 }
