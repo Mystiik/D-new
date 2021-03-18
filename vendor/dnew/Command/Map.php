@@ -11,7 +11,9 @@ class Map {
     $centerX = $params[1] ?? $user->mapX;
     $centerY = $params[2] ?? $user->mapY;
     $rayon = $params[3] ?? 2; // 2 -> 13 maps, 3 -> 25 maps
-    $rayon++; // create a border
+
+    $border = 2;
+    $rayon += $border;
 
     $response .= 'WORLD,' . \World::SIZE_X . ',' . \World::SIZE_Y  . ',' . \Map::SIZE_Y  . ',' . \Map::SIZE_Y . '|';
 
@@ -23,7 +25,7 @@ class Map {
 
         // Map + Object
         $range = abs($x) + abs($y);
-        if (0 <= $rayon and $rayon <= 3 + 1 and $range < $rayon) {
+        if (0 <= $rayon and $rayon <= 3 + $border and $range <= $rayon - $border) {
           $response .= $map->getMapCompressedToSend() . '|';
         } else {
           // Map only
